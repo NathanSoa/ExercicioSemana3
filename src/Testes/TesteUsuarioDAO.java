@@ -64,4 +64,14 @@ public class TesteUsuarioDAO {
 		
 		Assertion.assertEquals(expectedTable, currentTable);
 	}
+	
+	@Test
+	public void recuperaPorLogin() {
+		Usuario u = usuDAO.recuperar("nathan");
+		assertEquals(u.getLogin(), "nathan");
+		assertEquals(u.getEmail(), "nathan@email.com");
+		assertEquals(u.getNome(), "nathan");
+		assertEquals(u.getSenha(), "senhaNathan");
+		assertEquals(u.getPontos(), 5);
+	}
 }
