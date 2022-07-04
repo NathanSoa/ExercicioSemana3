@@ -33,23 +33,22 @@ public class TesteUsuarioDAO {
 	}
 
 	@Test
-	public void recuperaTodos() {
+	public void recuperaTodosPorRanking() {
 		List<Usuario> lista = usuDAO.ranking();
 		assertEquals(3, lista.size());
 		assertEquals("15", String.valueOf(lista.get(0).getPontos()));
 	}
 	
-	/*
 	@Test
 	public void insereNovo() throws SQLException, Exception {
-		UsuarioDAO.insereUsuario("nathan 4", "nathan 4", "nathan4@outlook.com");
+		usuDAO.inserir(new Usuario("nathan 4", "nathan4@gmail.com", "nathan 4", "senhaNathan4", 30));
 		
 		IDataSet currentDataSet = jdt.getConnection().createDataSet();
-		ITable currentTable = currentDataSet.getTable("USUARIORIO");
+		ITable currentTable = currentDataSet.getTable("USUARIO");
 		FlatXmlDataFileLoader loader = new FlatXmlDataFileLoader();
-		IDataSet expectedDataSet = loader.load("/verifica.xml");
-		ITable expectedTable = expectedDataSet.getTable("USUARIORIO");
+		IDataSet expectedDataSet = loader.load("/testeInserir.xml");
+		ITable expectedTable = expectedDataSet.getTable("USUARIO");
 		
 		Assertion.assertEquals(expectedTable, currentTable);
-	}*/
+	}
 }
