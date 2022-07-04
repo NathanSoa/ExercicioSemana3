@@ -16,6 +16,8 @@ public class Usuario {
 		this.pontos = pontos;
 	}
 	
+	public Usuario() {}
+	
 	public String getLogin() {
 		return login;
 	}
