@@ -51,4 +51,17 @@ public class TesteUsuarioDAO {
 		
 		Assertion.assertEquals(expectedTable, currentTable);
 	}
+	
+	@Test
+	public void AumentaPontosUsuario() throws SQLException, Exception {
+		usuDAO.adicionarPontos("nathan 3", 35);
+		
+		IDataSet currentDataSet = jdt.getConnection().createDataSet();
+		ITable currentTable = currentDataSet.getTable("USUARIO");
+		FlatXmlDataFileLoader loader = new FlatXmlDataFileLoader();
+		IDataSet expectedDataSet = loader.load("/testeAdicionaPontos.xml");
+		ITable expectedTable = expectedDataSet.getTable("USUARIO");
+		
+		Assertion.assertEquals(expectedTable, currentTable);
+	}
 }
