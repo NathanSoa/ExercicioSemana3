@@ -21,7 +21,7 @@ public class ImplUsuarioDAO implements UsuarioDAO {
 	@Override
 	public void adicionarPontos(String login, int pontos) {
 		
-		try (Connection c = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/usuarioDB", "root", "5432es")) {
+		try (Connection c = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/courseraDB", "root", "5432es")) {
 			String sql = "UPDATE usuario SET pontos = pontos + ? WHERE login = ?";
 			PreparedStatement stmt =  c.prepareStatement(sql);
 			
@@ -37,7 +37,22 @@ public class ImplUsuarioDAO implements UsuarioDAO {
 
 	@Override
 	public void inserir(Usuario u) {
-		// TODO Auto-generated method stub
+		
+		try (Connection c = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/courseraDB", "root", "5432es")) {
+			String sql = "INSERT INTO usuario(login, email, nome, senha, pontos) VALUES (?, ?, ?, ?, ?)";
+			PreparedStatement stmt =  c.prepareStatement(sql);
+			
+			stmt.setString(1, u.getLogin());
+			stmt.setString(2, u.getEmail());
+			stmt.setString(3, u.getNome());
+			stmt.setString(4, u.getSenha());
+			stmt.setInt(5, u.getPontos());
+			
+			stmt.executeUpdate();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
 		
 	}
 
