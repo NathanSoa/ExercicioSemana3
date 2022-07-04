@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import Model.Usuario;
@@ -62,7 +63,7 @@ public class ImplUsuarioDAO implements UsuarioDAO {
 		Usuario u = new Usuario();
 		
 		try (Connection c = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/courseraDB", "root", "5432es")) {
-			String sql = "SELECT * FROM usuario WHERE login = ?;";
+			String sql = "SELECT * FROM usuario WHERE login = ?";
 			PreparedStatement stmt =  c.prepareStatement(sql);
 			
 			stmt.setString(1, login);
@@ -81,8 +82,21 @@ public class ImplUsuarioDAO implements UsuarioDAO {
 
 	@Override
 	public List<Usuario> ranking() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Usuario> lista = new ArrayList<>();
+		
+		try (Connection c = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/courseraDB", "root", "5432es")) {
+			String sql = "SELECT * FROM usuario ORDER BY pontos DESC";
+			PreparedStatement stmt =  c.prepareStatement(sql);
+			ResultSet rs = stmt.executeQuery();
+			
+			while(rs.next()) {
+				lista.add(montaObjeto(rs));
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return lista;
 	}
 
 	private Usuario montaObjeto(ResultSet rs) throws SQLException {
