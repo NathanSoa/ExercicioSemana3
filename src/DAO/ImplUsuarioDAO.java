@@ -23,7 +23,7 @@ public class ImplUsuarioDAO implements UsuarioDAO {
 	@Override
 	public void adicionarPontos(String login, int pontos) {
 		
-		try (Connection c = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/courseraDB", "root", "5432es")) {
+		try (Connection c = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/courseraDB", "usuarioTeste", "senhaPadrao")) {
 			String sql = "UPDATE usuario SET pontos = pontos + ? WHERE login = ?";
 			PreparedStatement stmt =  c.prepareStatement(sql);
 			
@@ -40,7 +40,7 @@ public class ImplUsuarioDAO implements UsuarioDAO {
 	@Override
 	public void inserir(Usuario u) {
 		
-		try (Connection c = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/courseraDB", "root", "5432es")) {
+		try (Connection c = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/courseraDB", "usuarioTeste", "senhaPadrao")) {
 			String sql = "INSERT INTO usuario(login, email, nome, senha, pontos) VALUES (?, ?, ?, ?, ?)";
 			PreparedStatement stmt =  c.prepareStatement(sql);
 			
@@ -62,7 +62,7 @@ public class ImplUsuarioDAO implements UsuarioDAO {
 	public Usuario recuperar(String login) {
 		Usuario u = new Usuario();
 		
-		try (Connection c = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/courseraDB", "root", "5432es")) {
+		try (Connection c = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/courseraDB", "usuarioTeste", "senhaPadrao")) {
 			String sql = "SELECT * FROM usuario WHERE login = ?";
 			PreparedStatement stmt =  c.prepareStatement(sql);
 			
@@ -84,7 +84,7 @@ public class ImplUsuarioDAO implements UsuarioDAO {
 	public List<Usuario> ranking() {
 		List<Usuario> lista = new ArrayList<>();
 		
-		try (Connection c = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/courseraDB", "root", "5432es")) {
+		try (Connection c = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/courseraDB", "usuarioTeste", "senhaPadrao")) {
 			String sql = "SELECT * FROM usuario ORDER BY pontos DESC";
 			PreparedStatement stmt =  c.prepareStatement(sql);
 			ResultSet rs = stmt.executeQuery();
