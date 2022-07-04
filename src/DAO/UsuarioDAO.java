@@ -1,5 +1,9 @@
 package DAO;
 
+import java.util.List;
+
+import Model.Usuario;
+
 public interface UsuarioDAO {
 	   
 	   //insere um novo usuário no banco de dados
